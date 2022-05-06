@@ -14,7 +14,7 @@ As of now the tool contains 5 features:
 -changes the character's zorder when they are speaking.
 
 `Autofilter`
--darkens the character in when they are not speaking.
+-darkens the character when they are not speaking.
 
 `Automouth`
 -changes the character's mouth when they are speaking. (see the Doki Doki Literature Club's Mood Posing Tool for more details)
