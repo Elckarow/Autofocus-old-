@@ -26,4 +26,4 @@ layeredimage eileen forward:
     
 ########################
 
-4) take a look at each in-depth guide to make sure you understand of each feature works
+4) take a look at each in-depth guide to make sure you understand how each feature works
