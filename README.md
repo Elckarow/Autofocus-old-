@@ -7,19 +7,19 @@ A Ren'Py tool that aims at making character dialogues less of a chore to write.
 
 As of now the tool contains 5 features:
 
-# Autozoom
+`Autozoom`
 -zooms the character in when they are speaking.
 
-# Autozorder
+`Autozorder`
 -changes the character's zorder when they are speaking.
 
-# Autofilter
+`Autofilter`
 -darkens the character in when they are not speaking.
 
-# Automouth
+`Automouth`
 -changes the character's mouth when they are speaking. (see the Doki Doki Literature Club's Mood Posing Tool for more details)
 
-# Coloring
+`Coloring`
 -colors the character.
 
 a more in-depth guide of each feature is included in the package.
