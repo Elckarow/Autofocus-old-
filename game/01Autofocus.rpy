@@ -138,15 +138,6 @@ init -5 python:
     class AutofocusColoring(AutofocusDisplayable):
         """
         A class used for implementing image coloring using colormatrices. 
-        Add the following to your layeredimages:
-            ```
-            group autofocus_coloring:
-                attribute day default null
-                attribute dawn null
-                attribute sunset null
-                ...
-            ```
-        and so on with every matrices defined in `matrix_map`
 
         Attributes
         ----------
@@ -226,9 +217,9 @@ init -5 python:
             return rv
 
 
-    class AutofocusBase(AutofocusDisplayable):
+    class AutofocusUseDurationBase(AutofocusDisplayable):
         """
-        A subclass of `AutofocusDisplayable` used as a base for the Autofocus classes.
+        A subclass of `AutofocusDisplayable` used as a base for classes that should change a displayable over a period of time.
         This interpolates between two values with a specified amount of duration.
 
         Attributes
@@ -277,7 +268,7 @@ init -5 python:
         focused = {}
 
         def __init__(self, name, focused_level, unfocused_level, warper=None, **kwargs):
-            super(AutofocusBase, self).__init__(**kwargs)
+            super(AutofocusUseDurationBase, self).__init__(**kwargs)
 
             self.name = name
             self.focused_level = focused_level
@@ -365,9 +356,9 @@ init -5 python:
             self.current = min(self.current, levels[1])
 
 
-    class AutofocusFilter(AutofocusBase):
+    class AutofocusFilter(AutofocusUseDurationBase):
         """
-        A subclass of `AutofocusDisplayable` used to automatically darken Characters when they are not speaking.
+        A subclass of `AutofocusUseDurationBase` used to automatically darken Characters when they are not speaking.
 
         Attributes
         ----------
@@ -411,9 +402,9 @@ init -5 python:
             return rv
 
 
-    class AutofocusZoom(AutofocusBase):
+    class AutofocusZoom(AutofocusUseDurationBase):
         """
-        A subclass of `AutofocusDisplayable` used to automatically zoom Characters when they are speaking.
+        A subclass of `AutofocusUseDurationBase` used to automatically zoom Characters when they are speaking.
 
         Attributes
         ----------
