@@ -1,0 +1,25 @@
+1) shove 01Autofocus.rpy into your 'game' folder
+
+########################
+
+2) define your characters using the functions provided with the tool
+so if you used to do
+
+define eileen = Character("Eileen", image="eileen")
+
+do instead
+
+define eileen = AutofocusCharacter("Eileen", image="eileen")
+
+same with DynamicCharacters
+
+define eileen = DynamicCharacter("e_name", image="eileen")
+define eileen = AutofocusDynamicCharacter("e_name", image="eileen")
+
+########################
+
+3) below your layeredimages definitions, add the following 'at AutofocusDisplayable(name="<character image tag>")'
+ie
+
+layeredimage eileen forward:
+    at AutofocusDisplayable(name="eileen")
