@@ -2,6 +2,9 @@
 A Ren'Py tool that aims at making character dialogues less of a chore to write.
 
 
+
+
+
 As of now the tool contains 5 features:
 
 # Autozoom
