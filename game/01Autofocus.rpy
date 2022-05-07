@@ -183,7 +183,7 @@ init -5 python:
 
         @staticmethod
         def is_on():
-            return AutofocusStore.matrix_coloring
+            return AutofocusStore.autofocus_coloring
 
         @property
         def matrix(self):
@@ -569,7 +569,7 @@ init -100 python in AutofocusStore:
     __author__ = "Pseurae#6758", "Elckarow#8399"
     __version__ = (1, 1, 0) # 1.0.0 was Pseurae's
 
-    matrix_coloring = True
+    autofocus_coloring = True
     autofocus_filter = True
     autofocus_zoom = True
     autofocus_zoom_zorder_minimum_char_requirement = 2
