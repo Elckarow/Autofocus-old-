@@ -574,7 +574,7 @@ init -100 python in AutofocusStore:
     autofocus_zoom = True
     autofocus_zoom_zorder_minimum_char_requirement = 2
     autofocus_zorder = True
-    autofocus_mouth = False
+    autofocus_mouth = True
 
     def version(tuple=False):
         """
