@@ -217,7 +217,7 @@ init -5 python:
             return rv
 
 
-    class AutofocusUseDurationBase(AutofocusDisplayable):
+    class AutofocusInterpolation(AutofocusDisplayable):
         """
         A subclass of `AutofocusDisplayable` used as a base for classes that should change a displayable over a period of time.
         This interpolates between two values with a specified amount of duration.
@@ -268,7 +268,7 @@ init -5 python:
         focused = {}
 
         def __init__(self, name, focused_level, unfocused_level, warper=None, **kwargs):
-            super(AutofocusUseDurationBase, self).__init__(**kwargs)
+            super(AutofocusInterpolation, self).__init__(**kwargs)
 
             self.name = name
             self.focused_level = focused_level
@@ -356,9 +356,9 @@ init -5 python:
             self.current = min(self.current, levels[1])
 
 
-    class AutofocusFilter(AutofocusUseDurationBase):
+    class AutofocusFilter(AutofocusInterpolation):
         """
-        A subclass of `AutofocusUseDurationBase` used to automatically darken Characters when they are not speaking.
+        A subclass of `AutofocusInterpolation` used to automatically darken Characters when they are not speaking.
 
         Attributes
         ----------
@@ -402,9 +402,9 @@ init -5 python:
             return rv
 
 
-    class AutofocusZoom(AutofocusUseDurationBase):
+    class AutofocusZoom(AutofocusInterpolation):
         """
-        A subclass of `AutofocusUseDurationBase` used to automatically zoom Characters when they are speaking.
+        A subclass of `AutofocusInterpolation` used to automatically zoom Characters when they are speaking.
 
         Attributes
         ----------
