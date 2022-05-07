@@ -7,7 +7,7 @@ init -5 python:
     from __future__ import print_function # for logging purposes
 
 
-    def AutofocusCharacter(name=renpy.character.NotSet, kind=None, **kwargs):
+    def Character(name=renpy.character.NotSet, kind=None, **kwargs):
         """
         Creates and returns a `Character` object that allows, if image is given, features such as auto-zoom or coloring to be used.
         See the `Character` function for more details.
@@ -20,12 +20,24 @@ init -5 python:
         
         return char
     
-    def AutofocusDynamicCharacter(name_expr, **kwargs):
+    def DynamicCharacter(name_expr, **kwargs):
         """
         Creates and returns an `AutofocusCharacter` with the `dynamic` property set to `True`.
         See the `DynamicCharacter` function for more details.
         """
         return AutofocusCharacter(name_expr, dynamic=True, **kwargs)
+        
+    def AutofocusCharcater(name=renpy.character.NotSet, kind=None, **kwargs):
+        """
+        Needed for backwards comptability
+        """
+        return Character(name, kind=kind, **kwargs)
+    
+    def AutofocusDynamicCharcater(name_expr, **kwargs):
+        """
+        Needed for backwards comptability
+        """
+        return DynamicCharacter(name, **kwargs)
     
 
     def get_all_subclasses(cls):
