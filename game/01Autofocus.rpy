@@ -599,4 +599,4 @@ init -100 python in AutofocusStore:
 
 init 999 python hide:
     for name, char in AutofocusDisplayable.characters.items():
-        char.display_args["callback"] = [ _class(name) for _class in BaseCharCallback.get_subclasses() if _class.can_be_used() ]
+        char.display_args["callback"] = [ cls(name) for cls in BaseCharCallback.get_subclasses() if cls.can_be_used() ]
