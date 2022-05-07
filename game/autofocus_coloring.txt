@@ -16,4 +16,12 @@ group autofocus_coloring:
 and so on with every matrix defined.
 
 
+to use it in game, just show the character with one of the attribute in the aformentionned group
+ie
+
+show eileen dawn
+
+as simple as that
+
+
 If the version of Ren'Py is prior to 7.4.0, then this feature will automatically be disabled, as the ATL property 'matrixcolor' has yet to be implemented.
