@@ -27,3 +27,7 @@ layeredimage eileen forward:
 ########################
 
 4) take a look at each in-depth guide to make sure you understand how each feature works
+
+########################
+
+5) in the case where every condition is met but you still can't use a feature, please take a look at `log.txt`. some features are automatically disabled for renpy versions that do not support them
