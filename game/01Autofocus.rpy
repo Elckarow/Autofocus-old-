@@ -176,7 +176,7 @@ init -5 python:
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
-                print("---[INCOMPATIBLE VERSION]--- AutofocusColoring disabled")
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusColoring disabled" % renpy.version())
                 return False
 
             return config.gl2
@@ -381,7 +381,7 @@ init -5 python:
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
-                print("---[INCOMPATIBLE VERSION]--- AutofocusFilter disabled")
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusFilter disabled" % renpy.version())
                 return False
 
             return config.gl2
@@ -556,7 +556,7 @@ init -5 python:
         @staticmethod
         def can_be_used():
             if not renpy.version(tuple=True) >= (7, 0):
-                print("---[INCOMPATIBLE VERSION]--- AutofocusMouth disabled")
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.0 OR ABOVE]--- AutofocusMouth disabled" % renpy.version())
                 return False
 
             return True
