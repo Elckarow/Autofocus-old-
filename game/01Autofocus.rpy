@@ -559,8 +559,8 @@ init -5 python:
             )
 
         def condition(self):
-            other_mouth_applied = bool(self.mouth_tags & set(self.attributes))
-            return AutofocusStore.autofocus_mouth and not other_mouth_applied
+            no_other_mouth_applied = not {self.begin_parameter, self.end_parameter}.intersection(self.attributes)
+            return AutofocusStore.autofocus_mouth and no_other_mouth_applied
 
         def do_stuff(self, mouth):
             renpy.show("%s %s" % (self.name, mouth), layer=self.layer)
