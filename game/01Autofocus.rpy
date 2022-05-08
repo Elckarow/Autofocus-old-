@@ -485,14 +485,14 @@ init -5 python:
             self.end_parameter = end_parameter
 
         def condition(self):
-            raise AttributeError("%s.condition not implemented" % self)
+            raise NotImplementedError("%s.condition not implemented" % self)
         
         def do_stuff(self, arg):
             """
             `arg`
                 Passed at the beginning / end of each callbacks.
             """
-            raise AttributeError("%s.do_stuff not implemented" % self)
+            raise NotImplementedError("%s.do_stuff not implemented" % self)
 
         def __call__(self, event, interact=True, **kwargs):
             if not interact: return
