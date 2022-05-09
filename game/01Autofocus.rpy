@@ -336,8 +336,6 @@ init -5 python:
 
                     self.focused[self.name] = False
 
-                else: raise ValueError("unkown overlimit_behavior %r for %r" % (self.overlimit_behavior, self))
-
         def process_logic(self, st):
             self.handle_logic()
             self.lerp_value(st)
