@@ -579,7 +579,7 @@ init -100 python in AutofocusStore:
     This substore contains variables needed for controlling whether these features can be used or not, as well as informations about the project.
     """
     __author__ = "Pseurae#6758", "Elckarow#8399"
-    __version__ = (1, 1, 0) # 1.0.0 was Pseurae's
+    __version__ = (1, 2, 0)
 
     autofocus_coloring = True
     autofocus_filter = True
