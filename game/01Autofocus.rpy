@@ -89,8 +89,7 @@ init -5 python:
             Returns all subclasses of the current class.
 
         `character_visible_num()` -> int [Static Method]
-            Returns the number of Characters that are showing and that are defined
-            using `AutofocusCharacter` or `AutofocusDynamicCharacter`.
+            Returns the number of Characters that are showing.
         """
 
         characters = { }
