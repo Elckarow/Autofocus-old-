@@ -521,7 +521,7 @@ init -5 python:
             return AutofocusStore.autofocus_zorder and self.character_visible_num() >= AutofocusStore.autofocus_zoom_zorder_minimum_char_requirement
 
         def do_stuff(self, zorder):
-            if "change_zorder" in dir(renpy):
+            if hasattr(renpy, "change_zorder"):
                 renpy.change_zorder(self.layer, self.name, zorder)
             else:
                 renpy.show(self.name, layer=self.layer, zorder=zorder)
@@ -577,7 +577,7 @@ init -100 python in AutofocusStore:
     This substore contains variables needed for controlling whether these features can be used or not, as well as informations about the project.
     """
     __author__ = "Pseurae#6758", "Elckarow#8399"
-    __version__ = (1, 2, 0)
+    __version__ = (1, 2, 1)
 
     autofocus_coloring = True
     autofocus_filter = True
