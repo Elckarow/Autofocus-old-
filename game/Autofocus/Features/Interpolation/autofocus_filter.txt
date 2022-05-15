@@ -1,13 +1,13 @@
 Feature: Autofilter
 
-When a character talks, if the conditions are met (here, if the variable AutofocusStore.autofocus_zoom is enabled and that config.gl2 is enabled),
-then the character will darken when they aren't talking.
-
-And of course when this character speaks, its brightness will return to normal, and vice-versa.
+When a character doesn't talk, their sprite will darken. And of course when this character speaks, its brightness will return to normal, and vice-versa.
 
 
-The character will darken in over 0.25 seconds, as defined in the variable 'self.duration'.
-The zooming will use the warper 'easein'.
+allowed user-arguments:
+focused_level (when the character speaks)          defaults to 0.0
+unfocused_level (when the character doesn't speak) defaults to -0.1
+duration                                           defaults to 0.25
+warper                                             defaults to None, changed into easein
 
 
-If the version of Ren'Py is prior to 7.4.0, then this feature will automatically be disabled, as the ATL property 'matrixcolor' has yet to be implemented.
+If the version of Ren'Py is one prior to 7.4.0, then this feature will automatically be disabled, as the ATL property 'matrixcolor' has yet to be implemented.
