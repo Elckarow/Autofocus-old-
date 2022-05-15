@@ -12,7 +12,13 @@ ie
 layeredimage eileen forward:
     at AutofocusDisplayable(name="eileen")
     
+    
 custom parameters can be passed. please take a look at the corresponding in-depth guide to know which parameter can be passed
+to pass a custom argument, use the subclass name, followed by an underscore, then the argument name
+ie
+
+layeredimage eileen forward:
+    at AutofocusDisplayable(name="eileen", AutofocusDropShadow_blur=10)
 
 ########################
 
