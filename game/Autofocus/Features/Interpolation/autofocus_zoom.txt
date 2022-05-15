@@ -1,11 +1,10 @@
 Feature: Autozoom
 
-When a character talks, if the conditions are met (here, if the variable AutofocusStore.autofocus_zoom is enabled
-and that there are at least as many characters showing as the variable AutofocusStore.autofocus_zoom_zorder_minimum_char_requirement),
-then the character will zoom in.
-
-And of course when another character speaks, the character zoomed in will return to its normal zoom.
+The character's sprite will zoom in when talking. And of course when another character speaks, the character's zoom in will return to its normal zoom.
 
 
-The character will zoom in over 0.5 seconds, as defined in the variable 'self.duration'.
-The zooming will use the warper 'easein'.
+allowed user-arguments:
+focused_level (when the character speaks)          defaults to 1.05
+unfocused_level (when the character doesn't speak) defaults to 1.0
+duration                                           defaults to 0.5
+warper                                             defaults to None, changed into easein
