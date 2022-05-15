@@ -7,12 +7,12 @@ init -100 python in AutofocusStore:
     __version__ = (1, 3, 0)
 
     autofocus_coloring = True
-    autofocus_dropshadow = False
+    autofocus_dropshadow = True
     autofocus_interpolation_minimum_char_requirement = 2
     autofocus_filter = True
     autofocus_zoom = True
     autofocus_zorder = True
-    autofocus_mouth = False
+    autofocus_mouth = True
 
     def version(tuple=False):
         """
