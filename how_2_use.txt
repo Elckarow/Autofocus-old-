@@ -4,7 +4,7 @@
 
 THIS 2) PART IS NO LONGER NEEDED
 
-2) define your characters using the functions provided with the tooll
+2) define your characters using the functions provided with the tool
 so if you used to do
 
 define eileen = Character("Eileen", image="eileen")
