@@ -1,22 +1,8 @@
-1) shove 01Autofocus.rpy into your 'game' folder
+1) copy everything into your 'game' folder
 
 ########################
 
-THIS 2) PART IS NO LONGER NEEDED
-
-2) define your characters using the functions provided with the tool
-so if you used to do
-
-define eileen = Character("Eileen", image="eileen")
-
-do instead
-
-define eileen = AutofocusCharacter("Eileen", image="eileen")
-
-same with DynamicCharacters
-
-define eileen = DynamicCharacter("e_name", image="eileen")
-define eileen = AutofocusDynamicCharacter("e_name", image="eileen")
+2) take a look at each in-depth guide to make sure you understand how each feature works
 
 ########################
 
@@ -26,10 +12,8 @@ ie
 layeredimage eileen forward:
     at AutofocusDisplayable(name="eileen")
     
-########################
-
-4) take a look at each in-depth guide to make sure you understand how each feature works
+custom parameters can be passed. please take a look at the corresponding in-depth guide to know which parameter can be passed
 
 ########################
 
-5) in the case where every condition is met but you still can't use a feature, please take a look at `log.txt`. some features are automatically disabled for renpy versions that do not support them
+4) in the case where every condition is met but you still can't use a feature, please take a look at `log.txt`. some features are automatically disabled for renpy versions that do not support them
