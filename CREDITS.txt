@@ -1,3 +1,4 @@
 In order to use this tool, the following credits are required:
   -Pseurae#6758 or https://github.com/Pseurae
   -Elckarow#8399 or https://github.com/Elckarow
+  -Q™#9999 for the drop shadow effect
