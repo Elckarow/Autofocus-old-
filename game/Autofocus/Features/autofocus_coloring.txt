@@ -1,7 +1,6 @@
 Feature: Coloring
 
-When a showing a character, if the conditions are met (here, if the variable AutofocusStore.autofocus_coloring is enabled and that config.gl2 is enabled),
-then the character will be colored in accordance with the attributes given.
+Will color the character's sprites in accordance to the attributes given.
 
 
 The different colors are defined in the class variable 'matrix_map'.
