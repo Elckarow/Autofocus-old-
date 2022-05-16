@@ -2,6 +2,7 @@ init -5 python:
     """
     Make sure to credit the authors:
         Pseurae#6758 was the one that made this entire system.
+        Q™#9999 for the drop shadow effect.
         Elckarow#8399 (me), who is maintaining this thing and for making it usable and available.
     """
     
