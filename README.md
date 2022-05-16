@@ -22,6 +22,9 @@ As of now the tool contains 5 features (and only works for Ren'Py 7):
 `Coloring`
 -colors the character.
 
+`DropShadow`
+-adds a drop shadow effect to the character sprites
+
 a more in-depth guide of each feature is included in the package.
 
 -
