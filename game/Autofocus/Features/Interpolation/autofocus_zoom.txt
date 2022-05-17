@@ -2,6 +2,7 @@ Feature: Autozoom
 
 The character's sprite will zoom in when talking. And of course when another character speaks, the character's zoom in will return to its normal zoom.
 
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_zoom`.
 
 allowed user-arguments:
 focused_level (when the character speaks)          defaults to 1.05
