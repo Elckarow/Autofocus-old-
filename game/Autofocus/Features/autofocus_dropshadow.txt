@@ -2,6 +2,8 @@ Feature: DropShadow
 
 Adds a drop shadow effect to the character's sprites.
 
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_dropshadow`.
+
 
 allowed arguments:
 xoffset              defaults to 3
