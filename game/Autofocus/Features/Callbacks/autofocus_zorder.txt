@@ -2,5 +2,7 @@ Feature: Autozorder
 
 The character's zorder will change to 3 when talking. And of course when another character speaks, the character's zorder will be set to 2.
 
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_zorder`.
+
 
 as of now, you can't pass arguments to classes used for callbacks
