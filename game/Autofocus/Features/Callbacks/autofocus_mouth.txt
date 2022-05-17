@@ -2,6 +2,8 @@ Feature: Automouth
 
 The character's mouth will be set to 'om' when talking if it doesn't already have another mouth applied. And of course when another character speaks, the character's mouth will be set to 'cm'.
 
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_mouth`.
+
 
 If the version of Ren'Py is prior to 7.0, then this feature will automatically be disabled, as layeredimages have yet to be implemented.
 
