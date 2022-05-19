@@ -33,3 +33,75 @@ init -100 python in AutofocusStore:
 
         if tuple: return __author__
         return ", ".join(__author__)
+        
+
+
+init -99 python in AutofocusStore:
+    def redraw_char(f):
+        def redraw():
+            f()
+            for img in AutofocusDisplayable.characters:
+                renpy.redraw(img, 0.0)
+        return redraw
+    
+    @redraw_char
+    def enable_coloring():
+        global autofocus_coloring
+        autofocus_coloring = True
+        
+    @redraw_char
+    def enable_dropshadow():
+        global autofocus_dropshadow
+        autofocus_dropshadow = True
+    
+    @redraw_char
+    def enable_filter():
+        global autofocus_filter
+        autofocus_filter = True
+        
+    @redraw_char
+    def enable_zoom():
+        global autofocus_zoom
+        autofocus_zoom = True
+    
+    @redraw_char
+    def enable_zorder():
+        global autofocus_zorder
+        autofocus_zorder = True
+        
+    @redraw_char
+    def enable_mouth():
+        global autofocus_mouth
+        autofocus_mouth = True
+    
+    
+    
+    @redraw_char
+    def disable_coloring():
+        global autofocus_coloring
+        autofocus_coloring = False
+        
+    @redraw_char
+    def disable_dropshadow():
+        global autofocus_dropshadow
+        autofocus_dropshadow = False
+    
+    @redraw_char
+    def disable_filter():
+        global autofocus_filter
+        autofocus_filter = False
+        
+    @redraw_char
+    def disable_zoom():
+        global autofocus_zoom
+        autofocus_zoom = False
+    
+    @redraw_char
+    def disable_zorder():
+        global autofocus_zorder
+        autofocus_zorder = False
+        
+    @redraw_char
+    def disable_mouth():
+        global autofocus_mouth
+        autofocus_mouth = False
