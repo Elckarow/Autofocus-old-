@@ -40,9 +40,13 @@ init -99 python in AutofocusStore:
     def redraw_char(f):
         def redraw():
             f()
+            
             for img in AutofocusDisplayable.characters:
+                if not renpy.showing(None, img): continue
                 renpy.redraw(img, 0.0)
+                
         return redraw
+    
     
     @redraw_char
     def enable_coloring():
