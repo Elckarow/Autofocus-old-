@@ -26,25 +26,38 @@ init -5 python:
             How much blur the drop shadow effect will have.
         """
 
-        allowed_args = (
+       allowed_args = (
             "xoffset",
             "yoffset",
             "offset",
-            "blur"
+            "blur",
+            "color",
+            "brightness"
         )
 
-        def __init__(self, child, name, xoffset=3, yoffset=3, blur=2.5, **kwargs):
+        def __init__(self, child, name, xoffset=0, yoffset=0, blur=10, **kwargs):
             super(AutofocusDropShadow, self).__init__()
            
             offset = kwargs.get("offset", None)
 
             if offset is not None:
                 xoffset, yoffset = offset
-                        
+            
             self.child = child
+            self.blur = blur
+
+            self.transform_child = Transform(
+                                        child,
+                                        anchor=(0.0, 0.0),
+                                        xoffset=xoffset,
+                                        yoffset=yoffset,
+                                        matrixcolor=TintMatrix(kwargs.get("color", "#000")) * BrightnessMatrix(kwargs.get("brightness", 1.0)),
+                                        subpixel=True
+                                    )
+
             self.child_ds = Flatten(
                                 Fixed(
-                                    Transform(child, anchor=(0.0, 0.0), xoffset=xoffset, yoffset=yoffset, blur=blur * renpy.display.draw.draw_per_virt, subpixel=True),
+                                    self.transform_child,
                                     child,
                                     fit_first=True
                                 )
