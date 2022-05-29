@@ -41,7 +41,7 @@ init -5 python:
             "brightness"
         )
 
-        def __init__(self, child, name, xoffset=0, yoffset=0, blur=10, **kwargs):
+        def __init__(self, child, name, xoffset=0, yoffset=0, blur=10, color="#000", brightness=1.0, **kwargs):
             super(AutofocusDropShadow, self).__init__()
            
             offset = kwargs.get("offset", None)
@@ -57,7 +57,7 @@ init -5 python:
                                         anchor=(0.0, 0.0),
                                         xoffset=xoffset,
                                         yoffset=yoffset,
-                                        matrixcolor=TintMatrix(kwargs.get("color", "#000")) * BrightnessMatrix(kwargs.get("brightness", 1.0)),
+                                        matrixcolor=TintMatrix(color) * BrightnessMatrix(brightness),
                                         subpixel=True
                                     )
 
