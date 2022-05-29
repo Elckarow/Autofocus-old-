@@ -23,7 +23,13 @@ init -5 python:
             If passed, should be a 2-element tuple contanining the `xoffset` and `yoffset` values.
 
         `blur`: int | float
-            How much blur the drop shadow effect will have.
+            How much blur the drop shadow effect will have. Stored as attribute to prevent resizing issues when rendering.
+        
+        `color`: tuple[int | float] | str
+            A value passed to the ColorMatrix `TintMatrix` that will change the color of the `transform_child`.
+        
+        `brightness`: int | float
+            A value passed to the ColorMatrix `BrightnessMatrix` that will change the brightness of the `transform_child`.
         """
 
        allowed_args = (
