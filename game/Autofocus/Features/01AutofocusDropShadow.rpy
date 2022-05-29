@@ -85,6 +85,7 @@ init -5 python:
             if not self.is_on():
                 rv = renpy.render(self.child, w, h, st, at)
             else:
+                self.tarnsform_child.blur = self.blur * renpy.display.draw.draw_per_virt
                 rv = renpy.render(self.child_ds, w, h, st, at)
 
             return rv
