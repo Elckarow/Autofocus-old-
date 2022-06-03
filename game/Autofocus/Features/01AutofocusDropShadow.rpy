@@ -32,7 +32,7 @@ init -5 python:
             A value passed to the ColorMatrix `BrightnessMatrix` that will change the brightness of the `transform_child`.
         """
 
-       allowed_args = (
+        allowed_args = (
             "xoffset",
             "yoffset",
             "offset",
