@@ -1,6 +1,6 @@
 Feature: Autozoom
 
-The character's sprite will zoom in when talking. And of course when another character speaks, the character's zoom in will return to its normal zoom.
+The character's sprite will zoom in when talking, and when another character speaks, the character's zoom will return to its normal zoom.
 
 
 allowed user-arguments:
