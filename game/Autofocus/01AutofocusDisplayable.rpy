@@ -52,9 +52,6 @@ init -5 python:
             Populates the `attributes` variable and updates the `layer` variable if needed.
             To be called from the render method.
         
-        `set_layer()`
-            Set the layer the displayable is showing on.
-        
         `get_subclasses(exclude: list[type] | tuple[type] | set[type], exclude_subclasses: bool)` -> set[type] [Class Method]
             Returns all subclasses of the current class.
 
@@ -109,7 +106,7 @@ init -5 python:
             return child
 
         def set_attributes(self):
-            self.set_layer()
+            self.layer = get_layer(self.name)
 
             if self.layer is None:
                 self.attributes = [ ]
@@ -117,12 +114,8 @@ init -5 python:
 
             self.attributes = list(renpy.get_attributes(self.name, self.layer) or [ ])
         
-        def set_layer(self):
-            self.layer = get_layer(self.name)
-        
         def character_visible_num(self):
-            self.set_layer()
-            return len(list(filter(renpy.showing, self.layer, AutofocusDisplayable.characters.keys())))
+            return len(list(filter(renpy.showing, AutofocusDisplayable.characters.keys())))
 
         @classmethod
         def get_subclasses(cls, exclude=(), exclude_subclasses=False):
