@@ -55,7 +55,7 @@ init -5 python:
         `get_subclasses(exclude: list[type] | tuple[type] | set[type], exclude_subclasses: bool)` -> set[type] [Class Method]
             Returns all subclasses of the current class.
 
-        `character_visible_num()` -> int
+        `character_visible_num()` -> int [Static Method]
             Returns the number of Characters that are showing and that use Autofocus features.
         """
 
@@ -114,7 +114,8 @@ init -5 python:
 
             self.attributes = list(renpy.get_attributes(self.name, self.layer) or [ ])
         
-        def character_visible_num(self):
+        @staticmethod
+        def character_visible_num(): # static to ensure we use AutofocusDisplayable.characters and not SomeSubclass.characters
             return len(list(filter(renpy.showing, AutofocusDisplayable.characters.keys())))
 
         @classmethod
