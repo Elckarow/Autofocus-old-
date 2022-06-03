@@ -32,10 +32,10 @@ init -5 python:
         `characters`: dict[str, Character] [Class Variable]
             Stores the Characters created.
 
-        `allowed_args`: None | list[str] | tuple[str] [Class Variable]
+        `allowed_args`: None | list[str] | tuple[str] | set[type] [Class Variable]
             Arguments the user is allowed to pass.
             If `None`, no argument is allowed, and will raise an error in case an argument is passed.
-            Else, should be a `list` / `tuple` that contains the arguments allowed, and will raise an error in case a non-allowed argument is passed.
+            Else, should be a `list` / `tuple` / `set` that contains the arguments allowed, and will raise an error in case a non-allowed argument is passed.
 
         `callback_kwargs`: dict[str, dict[str, dict[str, Any]]] [Class Variable]
             Stores arguments passed to features using callbacks.
