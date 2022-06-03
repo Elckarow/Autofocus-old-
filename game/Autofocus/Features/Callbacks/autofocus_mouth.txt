@@ -1,6 +1,6 @@
 Feature: Automouth
 
-The character's mouth will be set to 'begin_parameter' when talking if it doesn't already have another mouth applied. And when another character speaks, the character's mouth will be set to 'end_parameter' if it doesn't already have another mouth applied.
+The character's mouth will be set to 'begin_parameter' when talking if it doesn't already have another mouth applied, and when another character speaks, the character's mouth will be set to 'end_parameter' if it doesn't already have another mouth applied.
 
 allowed user-arguments:
 begin_parameter (when the character speaks)      defaults to 'om'
