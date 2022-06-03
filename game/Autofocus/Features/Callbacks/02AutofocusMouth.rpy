@@ -4,7 +4,7 @@ init -5 python:
     class AutofocusMouth(BaseCharCallback):
         """
         A class used to automatically change mouths.
-        Only works if moods are used, if the mouth attributes `om` and `cm` are defined, and if the mouth attributes are defined within the `mouth` group.
+        Only works if the mouth attributes are defined within the `mouth` group.
 
         Attributes
         ----------
