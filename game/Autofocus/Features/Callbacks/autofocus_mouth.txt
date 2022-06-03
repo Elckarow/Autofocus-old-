@@ -1,12 +1,9 @@
 Feature: Automouth
 
-The character's mouth will be set to 'om' when talking if it doesn't already have another mouth applied. And of course when another character speaks, the character's mouth will be set to 'cm'.
+The character's mouth will be set to 'begin_parameter' when talking if it doesn't already have another mouth applied. And when another character speaks, the character's mouth will be set to 'end_parameter' if it doesn't already have another mouth applied.
 
+allowed user-arguments:
+begin_parameter (when the character speaks)      defaults to 'om'
+end_parameter (when the character doesn't speak) defaults to 'cm'
 
 If the version of Ren'Py is prior to 7.0, then this feature will automatically be disabled, as layeredimages have yet to be implemented.
-
-
-
-if you have no idea what in the hell 'om' and 'cm' are, i'd advice you to take a look at the Doki Doki Literature Club MPT https://github.com/chronoshag/DDLCMPT.
-
-as of now, you can't pass arguments to classes used in callbacks.
