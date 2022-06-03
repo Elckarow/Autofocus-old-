@@ -26,6 +26,19 @@ init -6 python:
     """
 
     def get_all_subclasses(cls, exclude=(), exclude_subclasses=False):
+        """
+        Returns all subclasses of `cls`.
+        
+        `cls`: type
+            The class that should return the subclasses from.
+        
+        `exclude`: set[type] | tuple[type] | list[type] | type
+            A class / list of classes we should exclude from the returned value.
+           
+        `exclude_subclasses`: bool
+            If `True`, will exclude all subclasses of the classes passed in `exclude`.
+        """
+        
         def get_subclasses(cls, exclude=()):
             for subclass in cls.__subclasses__():
                 if subclass not in exclude:
@@ -48,6 +61,13 @@ init -6 python:
     
 
     def get_layer(name):
+        """
+        Gets the layer `name` is showing on, or `None` if not found.
+        
+        `name`: str
+            The tag of the image.
+        """
+        
         for layer in config.layers:
             if name not in renpy.get_showing_tags(layer): continue
             break
@@ -58,6 +78,26 @@ init -6 python:
     
 
     def filter_autofocus_kwargs(kwargs, mode="both", error=True):
+        """
+        Given a dictionnary, will filter the dictionnary and return a new one.
+        
+        `kwargs`: dict[Any, Any]
+            The dictionnary to filter.
+        
+        `mode`: str
+            Will dictate the returned value.
+            "both" will return a tuple containing Features kwargs and Callbacks kwargs.
+            "features" will only return Features kwargs.
+            "callbacks" will only return Callbacks kwargs.
+            "all" will return a dictionnary containing both Features kwargs and Callbacks kwargs.
+            "filter" will return a dictionnary containing everything but Features kwargs and Callbacks kwargs.
+            
+            Will raise an error if not any of the above.
+        
+        `error`: bool
+            If `True` and that `mode` isn't `"filter"`, will raise an error if a found subclass name isn't known.
+        """
+        
         subclasses_name = [
             cls.__name__
             for cls in AutofocusDisplayable.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True)
