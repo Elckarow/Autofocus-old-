@@ -6,10 +6,10 @@ init -5 python:
 
         Attributes
         ----------
-        `begin_parameter`: str | int
+        `begin_parameter`: Any
             Parameter passed to the `do_stuff()` function when the Character speaks.
 
-        `end_parameter`: str | int
+        `end_parameter`: Any
             Parameter passed to the `do_stuff()` function when the Character doesn't speak.
 
         Methods
@@ -17,9 +17,14 @@ init -5 python:
         `condition()` -> bool
             Logic check. To be overriden.
         
-        `do_stuff(arg: str | int)`
+        `do_stuff(arg: Any)`
             Does something. To be overriden.
         """
+        
+        allowed_args = (
+            "begin_parameter",
+            "end_parameter"
+        )
 
         def __init__(self, name, begin_parameter, end_parameter, **kwargs):
             super(BaseCharCallback, self).__init__()
