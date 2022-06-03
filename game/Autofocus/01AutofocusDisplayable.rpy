@@ -34,8 +34,11 @@ init -5 python:
 
         `allowed_args`: None | list[str] | tuple[str] [Class Variable]
             Arguments the user is allowed to pass.
-            If `None`, no argument is allowed, and will log a message in case an argument is passed.
-            Else, should be a `list` / `tuple` that contains the arguments allowed, and will log a message in case a non-allowed argument is passed.
+            If `None`, no argument is allowed, and will raise an error in case an argument is passed.
+            Else, should be a `list` / `tuple` that contains the arguments allowed, and will raise an error in case a non-allowed argument is passed.
+
+        `callback_kwargs`: dict[str, dict[str, dict[str, Any]]] [Class Variable]
+            Stores arguments passed to features using callbacks.
 
         Methods
         -------
@@ -49,16 +52,19 @@ init -5 python:
             Populates the `attributes` variable and updates the `layer` variable if needed.
             To be called from the render method.
         
-        `get_subclasses()` -> set[type] [Class Method]
+        `set_layer()`
+            Set the layer the displayable is showing on.
+        
+        `get_subclasses(exclude: list[type] | tuple[type] | set[type], exclude_subclasses: bool)` -> set[type] [Class Method]
             Returns all subclasses of the current class.
 
-        `character_visible_num()` -> int [Static Method]
-            Returns the number of Characters that are showing and that are defined
-            using `AutofocusCharacter` or `AutofocusDynamicCharacter`.
+        `character_visible_num()` -> int
+            Returns the number of Characters that are showing and that use Autofocus features.
         """
 
         characters = { }
         allowed_args = None
+        callback_kwargs = { }
 
         def __init__(self, name=None, **kwargs):
             super(AutofocusDisplayable, self).__init__()
@@ -66,23 +72,9 @@ init -5 python:
             self.name = name
             self.attributes = [ ]
             self.layer = "master"
-            self.kwargs = { }
+            self.kwargs, callback_kwargs = filter_autofocus_kwargs(kwargs)
 
-            subclasses_name = [
-                cls.__name__
-                for cls in self.get_subclasses()
-            ]
-
-            for cls, v in kwargs.items():
-                og_cls = cls
-                cls, _, k = cls.partition("_")
-
-                if cls not in subclasses_name: raise Exception("Unknown subclass -> %r" % og_cls)
-
-                if cls not in self.kwargs:
-                    self.kwargs[cls] = { }
-
-                self.kwargs[cls][k] = v
+            AutofocusDisplayable.callback_kwargs.setdefault(self.name, callback_kwargs)
             
         @staticmethod
         def is_allowed():
@@ -97,7 +89,7 @@ init -5 python:
 
             child = Flatten(child) 
 
-            for cls in self.get_subclasses():
+            for cls in self.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True):
                 if not cls.is_allowed(): continue
 
                 cls_name = cls.__name__
@@ -117,25 +109,21 @@ init -5 python:
             return child
 
         def set_attributes(self):
-            if not self.name in renpy.get_showing_tags(self.layer):
-                self.layer = None
-
-                for layer in config.layers:
-                    if self.name not in renpy.get_showing_tags(layer): continue
-
-                    self.layer = layer
-                    break
+            self.set_layer()
 
             if self.layer is None:
                 self.attributes = [ ]
                 return
 
             self.attributes = list(renpy.get_attributes(self.name, self.layer) or [ ])
+        
+        def set_layer(self):
+            self.layer = get_layer(self.name)
+        
+        def character_visible_num(self):
+            self.set_layer()
+            return len(list(filter(renpy.showing, self.layer, AutofocusDisplayable.characters.keys())))
 
         @classmethod
-        def get_subclasses(cls):
-            return set(get_all_subclasses(cls))
-        
-        @staticmethod # static to ensure we use AutofocusDisplayable.characters and not SomeSubclass.characters
-        def character_visible_num():
-            return len(filter(renpy.showing, AutofocusDisplayable.characters.keys()))
+        def get_subclasses(cls, exclude=(), exclude_subclasses=False):
+            return set(get_all_subclasses(cls, exclude, exclude_subclasses))
