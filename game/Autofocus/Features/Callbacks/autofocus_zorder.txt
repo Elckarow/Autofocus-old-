@@ -1,6 +1,7 @@
 Feature: Autozorder
 
-The character's zorder will change to 3 when talking. And of course when another character speaks, the character's zorder will be set to 2.
+The character's zorder will change to 'begin_parameter' when talking, and when another character speaks, the character's zorder will be set to 'end_parameter'.
 
-
-as of now, you can't pass arguments to classes used for callbacks
+allowed user-arguments:
+begin_parameter (when the character speaks)      defaults to 3
+end_parameter (when the character doesn't speak) defaults to 2
