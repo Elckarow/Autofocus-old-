@@ -60,19 +60,22 @@ init -5 python:
             self.__matrix = value
 
         def set_current_matrix(self):
-            self.matrix = IdentityMatrix()
+            self.set_attributes()
 
             for tag, matrix in self.matrix_map.items():
                 if tag not in self.attributes: continue 
 
                 self.matrix = matrix
                 break
+                
+            else:
+                self.matrix = IdentityMatrix()
 
         def render(self, width, height, st, at):
-            self.set_attributes()
             self.set_current_matrix()
 
             if not self.is_on():
+                self.child.matrixcolor = IdentityMatrix()
                 return renpy.render(self.child, width, height, st, at)
             
             self.child.matrixcolor = self.matrix
