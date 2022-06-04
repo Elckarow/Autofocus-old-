@@ -33,6 +33,7 @@ init -5 python:
 
         def __init__(self, child, **kwargs):
             super(AutofocusColoring, self).__init__()
+            self.raw_child = child
             self.child = Transform(child)
 
         @staticmethod
@@ -80,3 +81,6 @@ init -5 python:
             rv = renpy.render(self.child, width, height, st, at)
 
             return rv
+
+        def __repr__(self):
+            return self.get_repr(self.raw_child) + "<AutofocusColoring on {} at {}>\n".format(self.name, hex(id(self)))
