@@ -35,8 +35,6 @@ init -5 python:
             super(AutofocusColoring, self).__init__()
             self.child = Transform(child)
 
-            self.matrix = IdentityMatrix()
-
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
