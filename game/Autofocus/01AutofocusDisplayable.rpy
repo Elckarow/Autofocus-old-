@@ -39,6 +39,18 @@ init -5 python:
 
         `callback_kwargs`: dict[str, dict[str, dict[str, Any]]] [Class Variable]
             Stores arguments passed to features using callbacks.
+        
+        `repr_dict`: dict[str, str]
+            A dictionnary containing every representaion of features used by a certain character.
+        
+        If you need to know the different parameters of a character, say `eileen`, do
+            ```
+            $ print(AutofocusDisplayable.repr_dict["eileen"])
+            ```
+        and for callbacks do
+            ```
+            $ print(AutofocusDisplayable.characters["eileen"].display_args["callback"])
+            ```
 
         Methods
         -------
@@ -57,11 +69,15 @@ init -5 python:
 
         `character_visible_num()` -> int [Static Method]
             Returns the number of Characters that are showing and that use Autofocus features.
+        
+        `get_repr(obj: Any)` -> str [Static Method]
+            If `obj` is a feature, returns `repr(obj)`, else retruns an empty string.
         """
 
         characters = { }
         allowed_args = None
         callback_kwargs = { }
+        repr_dict = { }
 
         def __init__(self, name=None, **kwargs):
             super(AutofocusDisplayable, self).__init__()
@@ -102,6 +118,8 @@ init -5 python:
                     if cls_name in self.kwargs: raise Exception("Arguments passed to %r, but this class doesn't allow user arguments." % cls_name)
                 
                 child = cls(child=child, name=self.name, **kwargs)
+            
+            AutofocusDisplayable.repr_dict[self.name] = repr(child)
                                                 
             return child
 
@@ -121,3 +139,13 @@ init -5 python:
         @classmethod
         def get_subclasses(cls, exclude=(), exclude_subclasses=False):
             return set(get_all_subclasses(cls, exclude, exclude_subclasses))
+
+        @staticmethod
+        def get_repr(obj):
+            if isinstance(obj, AutofocusDisplayable): return repr(obj)
+            return ""
+
+        def __repr__(self):
+            return "<AutofocusDisplayable {} at {}>".format(self.name, hex(id(self)))
+        
+        __str__ = __repr__
