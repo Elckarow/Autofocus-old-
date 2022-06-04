@@ -33,6 +33,7 @@ init -5 python:
 
         def __init__(self, child, **kwargs):
             super(AutofocusColoring, self).__init__()
+            self.name = name
             self.raw_child = child
             self.child = Transform(child)
 
