@@ -51,6 +51,8 @@ init -5 python:
             ```
             $ print(AutofocusDisplayable.characters["eileen"].display_args["callback"])
             ```
+        
+        If you ever read through the features' doc, you might encounter a `self.raw_child`. It's used for representation purposes so don't worry about it.
 
         Methods
         -------
