@@ -49,8 +49,12 @@ init -5 python:
             if offset is not None:
                 xoffset, yoffset = offset
             
-            self.child = child
+            self.name = name
+            self.child = self.raw_child = child
             self.blur = blur
+            self.color = color
+            self.xoffset = xoffset
+            self.yoffset = yoffset
 
             self.transform_child = Transform(
                                         child,
@@ -89,3 +93,6 @@ init -5 python:
                 rv = renpy.render(self.child_ds, w, h, st, at)
 
             return rv
+
+        def __repr__(self):
+            return self.get_repr(self.raw_child) + "<AutofocusDropShadow on {} at {}> | blur: {}, color: {}, xoffset: {}, yoffset: {}\n".format(self.name, hex(id(self)), self.blur, self.color, self.xoffset, self.yoffset)
