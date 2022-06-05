@@ -4,7 +4,8 @@
 
 2) take a look at each in-depth guide to make sure you understand how each feature works
 
-this one is very important: take a look inside `01AutofocusDisplayable.rpy` and `01OverridesAndOtherStuff.rpy`. a lot of things are explained in here.
+this one is very important: take a look inside `01AutofocusDisplayable.rpy`, `01OverridesAndOtherStuff.rpy` and `01AutofocusStore.rpy`.
+a lot of things are explained in here.
 
 ########################
 
