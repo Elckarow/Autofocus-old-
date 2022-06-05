@@ -159,4 +159,4 @@ init -5 python:
             self.current = min(self.current, levels[1])
 
         def __repr__(self):
-            return repr(self.raw_child) + "<{} on {} at {}> | warper: {!r}, focused_level: {}, unfocused_level: {}, duration: {}\n".format(type(self).__name__, self.name, hex(id(self)), self.warper, self.focused_level, self.unfocused_level, self.duration)
+            return self.get_repr(self.raw_child) + "<{} on {} at {}> | warper: {!r}, focused_level: {}, unfocused_level: {}, duration: {}\n".format(type(self).__name__, self.name, hex(id(self)), self.warper, self.focused_level, self.unfocused_level, self.duration)
