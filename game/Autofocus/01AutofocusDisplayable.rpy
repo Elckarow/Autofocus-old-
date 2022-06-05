@@ -49,7 +49,7 @@ init -5 python:
             ```
         and for callbacks do
             ```
-            $ print(AutofocusDisplayable.characters["eileen"].display_args["callback"])
+            $ print([repr(cls) for cls in eileen.display_args["callback"]])
             ```
         
         then look into `log.txt`.
