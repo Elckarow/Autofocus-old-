@@ -37,7 +37,7 @@ init -5 python:
         
         def do_stuff(self, arg):
             """
-            `arg`
+            `arg`: Any
                 Passed at the beginning / end of each callbacks.
             """
 
