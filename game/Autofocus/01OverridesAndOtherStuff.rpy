@@ -47,7 +47,7 @@ init -6 python:
                 for subclass in get_subclasses(subclass, exclude):
                     yield subclass
                 ### if you're using Ren'Py 8, remove the 2 lines above and uncomment the following line ###
-                ### both ways work but this all is better / faster ###
+                ### both ways work but this one is better / faster ###
 
                 #yield from get_subclasses(subclass, exclude)
 
