@@ -36,11 +36,6 @@ init -5 python:
             raise NotImplementedError("%s.condition not implemented" % self)
         
         def do_stuff(self, arg):
-            """
-            `arg`: Any
-                Passed at the beginning / end of each callbacks.
-            """
-
             raise NotImplementedError("%s.do_stuff not implemented" % self)
 
         def __call__(self, event, interact=True, **kwargs):
