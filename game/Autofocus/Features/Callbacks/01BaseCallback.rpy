@@ -7,10 +7,10 @@ init -5 python:
         Attributes
         ----------
         `begin_parameter`: Any
-            Parameter passed to the `do_stuff()` function when the Character speaks.
+            Parameter passed to the `do_stuff()` method when the Character speaks.
 
         `end_parameter`: Any
-            Parameter passed to the `do_stuff()` function when the Character doesn't speak.
+            Parameter passed to the `do_stuff()` method when the Character doesn't speak.
 
         Methods
         -------
