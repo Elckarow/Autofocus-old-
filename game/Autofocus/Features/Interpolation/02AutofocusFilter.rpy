@@ -20,7 +20,7 @@ init -5 python:
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
-                print("---[INCOMPATIBLE VERSION - %r - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusFilter disabled" % renpy.version())
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusFilter disabled" % renpy.version())
                 return False
 
             return config.gl2
