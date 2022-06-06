@@ -40,7 +40,7 @@ init -5 python:
         @staticmethod
         def can_be_used():
             if not renpy.version(tuple=True) >= (7, 0):
-                print("---[INCOMPATIBLE VERSION - %r - EXPECTED Ren'Py 7.0 OR ABOVE]--- AutofocusMouth disabled" % renpy.version())
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.0 OR ABOVE]--- AutofocusMouth disabled" % renpy.version())
                 return False
 
             return True
