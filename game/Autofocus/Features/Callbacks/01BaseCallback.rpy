@@ -33,10 +33,10 @@ init -5 python:
             self.end_parameter = end_parameter
 
         def condition(self):
-            raise NotImplementedError("%s.condition not implemented" % self)
+            raise NotImplementedError("<%s %s>.condition not implemented" % (type(self).__name__, self.name))
         
         def do_stuff(self, arg):
-            raise NotImplementedError("%s.do_stuff not implemented" % self)
+            raise NotImplementedError("<%s %s>.do_stuff not implemented" % (type(self).__name__, self.name))
 
         def __call__(self, event, interact=True, **kwargs):
             if not interact: return
