@@ -58,10 +58,8 @@ init -5 python:
             "duration"
         )
 
-        def __init__(self, name, duration, focused_level, unfocused_level, warper, child, **kwargs):
+        def __init__(self, name, duration, focused_level, unfocused_level, warper, **kwargs):
             super(AutofocusInterpolation, self).__init__()
-            
-            self.raw_child = child
 
             if isinstance(warper, basestring):
                 func = getattr(_warper, warper, None)
@@ -157,6 +155,3 @@ init -5 python:
 
             self.current = max(self.current, levels[0])
             self.current = min(self.current, levels[1])
-
-        def __repr__(self):
-            return self.get_repr(self.raw_child) + "<{} on {} at {}> | warper: {!r}, focused_level: {}, unfocused_level: {}, duration: {}\n".format(type(self).__name__, self.name, hex(id(self)), self.warper, self.focused_level, self.unfocused_level, self.duration)
