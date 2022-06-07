@@ -14,7 +14,7 @@ init -5 python:
         focused = {}
 
         def __init__(self, child, name, duration=0.25, focused_level=0.0, unfocused_level=-0.1, warper=None, **kwargs):
-            super(AutofocusFilter, self).__init__(name=name, duration=duration, focused_level=focused_level, unfocused_level=unfocused_level, warper=warper, child=child)
+            super(AutofocusFilter, self).__init__(name=name, duration=duration, focused_level=focused_level, unfocused_level=unfocused_level, warper=warper)
             self.child = Transform(child)
 
         @staticmethod
