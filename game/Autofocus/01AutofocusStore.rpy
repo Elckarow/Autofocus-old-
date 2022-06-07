@@ -48,7 +48,6 @@ init 1 python in AutofocusStore:
             rv = f(*args, **kwargs)
             
             for img in AutofocusDisplayable.characters:
-                if get_layer(img) is None: continue
                 renpy.redraw(img, 0.0)
             
             return rv
