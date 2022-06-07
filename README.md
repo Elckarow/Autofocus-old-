@@ -17,7 +17,7 @@ As of now the tool contains 5 features (and only works for Ren'Py 7):
 -darkens the character when they are not speaking.
 
 `Automouth`
--changes the character's mouth when they are speaking. (see the Doki Doki Literature Club's Mood Posing Tool for more details)
+-changes the character's mouth when they are speaking.
 
 `Coloring`
 -colors the character.
