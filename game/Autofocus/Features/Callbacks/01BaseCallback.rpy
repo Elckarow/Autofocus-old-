@@ -54,6 +54,3 @@ init -5 python:
         @staticmethod
         def can_be_used():
             return True
-
-        def __repr__(self):
-            return "<{} on {} at {}> | begin_parameter: {}, end_parameter: {}".format(type(self).__name__, self.name, hex(id(self)), self.begin_parameter, self.end_parameter)
