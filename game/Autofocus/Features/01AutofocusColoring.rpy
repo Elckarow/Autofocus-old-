@@ -31,7 +31,7 @@ init -5 python:
             "night": SaturationMatrix(0.8) * TintMatrix((115, 115, 165))
         }
 
-        def __init__(self, child, **kwargs):
+        def __init__(self, child, name, **kwargs):
             super(AutofocusColoring, self).__init__()
             self.name = name
             self.child = Transform(child)
