@@ -40,6 +40,10 @@ init 1 python in AutofocusStore:
     from store import AutofocusDisplayable, get_layer
 
     def redraw_autofocus(f):
+        """
+        Does something, then redraws all characters showing that are using `Autofocus`.
+        """
+
         def redraw(*args, **kwargs):
             rv = f(*args, **kwargs)
             
