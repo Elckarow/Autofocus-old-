@@ -12,7 +12,7 @@ init -5 python:
         focused = { }
 
         def __init__(self, child, name, duration=0.5, focused_level=1.05, unfocused_level=1.0, warper=None, **kwargs):
-            super(AutofocusZoom, self).__init__(name=name, duration=duration, focused_level=focused_level, unfocused_level=unfocused_level, warper=warper, child=child)
+            super(AutofocusZoom, self).__init__(name=name, duration=duration, focused_level=focused_level, unfocused_level=unfocused_level, warper=warper)
             self.child = Transform(child, subpixel=True)
 
             self.overlimit_behavior = "unfocused"
