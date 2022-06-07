@@ -10,7 +10,7 @@ init -5 python:
         ----------
         `focused`: dict[str, bool] [Class Variable]
             A dictionary containing character focused bools.
-            To be redefined as a class variable again in other subclasses.
+            To be redefined as a class variable again in other subclasses (If Ren'Py 8+ is used, this is done automatically thanks to `__init_subclass__`).
 
         `focused_level`: float | int
             The value to be interpolated to if focused.
@@ -57,6 +57,11 @@ init -5 python:
             "warper",
             "duration"
         )
+        
+        if renpy.version(tuple=True) >= (8,):
+            def __init_subclass__(cls, *args, **kwargs):
+                cls.focused = { }
+                super(AutofocusInterpolation, self).__init_subclass__(*args, **kwargs)
 
         def __init__(self, name, duration, focused_level, unfocused_level, warper, **kwargs):
             super(AutofocusInterpolation, self).__init__()
