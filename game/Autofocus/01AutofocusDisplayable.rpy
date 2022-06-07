@@ -40,23 +40,6 @@ init -5 python:
         `callback_kwargs`: dict[str, dict[str, dict[str, Any]]] [Class Variable]
             Stores arguments passed to features using callbacks.
         
-        `repr_dict`: dict[str, str]
-            A dictionnary containing every representaion of features used by a certain character.
-        
-        If you need to know the different parameters of a character, say `eileen`, do
-            ```
-            $ print(AutofocusDisplayable.repr_dict["eileen"])
-            ```
-        and for callbacks do
-            ```
-            $ print([repr(cls) for cls in eileen.display_args["callback"]])
-            ```
-        
-        then look into `log.txt`.
-        
-        
-        If you ever read through the features' doc, you might encounter a `self.raw_child`. It's used for representation purposes so don't worry about it.
-
         Methods
         -------
         `is_allowed()` -> bool [Static Method]
@@ -144,11 +127,6 @@ init -5 python:
         @classmethod
         def get_subclasses(cls, exclude=(), exclude_subclasses=False):
             return set(get_all_subclasses(cls, exclude, exclude_subclasses))
-
-        @staticmethod
-        def get_repr(obj):
-            if isinstance(obj, AutofocusDisplayable): return repr(obj)
-            return ""
 
         def __repr__(self):
             return "<AutofocusDisplayable {} at {}>".format(self.name, hex(id(self)))
