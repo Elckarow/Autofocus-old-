@@ -129,6 +129,6 @@ init -5 python:
             return set(get_all_subclasses(cls, exclude, exclude_subclasses))
 
         def __repr__(self):
-            return "<AutofocusDisplayable {} at {}>".format(self.name, hex(id(self)))
+            return "<{} on {} at {}>".format(type(self).__name__, self.name, hex(id(self)))
         
         __str__ = __repr__
