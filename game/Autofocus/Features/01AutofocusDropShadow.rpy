@@ -50,6 +50,7 @@ init -5 python:
                 xoffset, yoffset = offset
             
             self.name = name
+            self.child = child
             self.blur = blur
 
             self.transform_child = Transform(
