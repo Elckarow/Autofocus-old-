@@ -7,7 +7,7 @@ init -5 python:
         """
 
         def __new__(cls, *args, **kwargs):
-            _class = super(Test, cls).__new__(cls, *args, **kwargs)
+            _class = super(RedefineFocused, cls).__new__(cls, *args, **kwargs)
             _class.focused = { }
             return _class
 
