@@ -56,10 +56,7 @@ init -5 python:
             Returns all subclasses of the current class.
 
         `character_visible_num()` -> int [Static Method]
-            Returns the number of Characters that are showing and that use Autofocus features.
-        
-        `get_repr(obj: Any)` -> str [Static Method]
-            If `obj` is a feature, returns `repr(obj)`, else retruns an empty string.
+            Returns the number of Characters that are showing and that use Autofocus' features.
         """
 
         characters = { }
