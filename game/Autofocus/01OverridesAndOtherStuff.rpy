@@ -150,7 +150,7 @@ init -6 python:
 init 999 python hide:
     for name, char in AutofocusDisplayable.characters.items():
         char.display_args["callback"] = [
-                                            cls(name, **AutofocusDisplayable.callback_kwargs[name].setdefault(cls.__name__, { }))
+                                            cls(name, **AutofocusDisplayable.callback_kwargs[name].get(cls.__name__, { }))
                                             for cls in BaseCharCallback.get_subclasses()
                                             if cls.can_be_used()
                                         ]
