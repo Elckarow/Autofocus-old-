@@ -103,9 +103,7 @@ init -5 python:
                     if cls_name in self.kwargs: raise Exception("Arguments passed to %r, but this class doesn't allow user arguments." % cls_name)
                 
                 child = cls(child=child, name=self.name, **kwargs)
-            
-            AutofocusDisplayable.repr_dict[self.name] = repr(child)
-                                                
+                                                            
             return child
 
         def set_attributes(self):
