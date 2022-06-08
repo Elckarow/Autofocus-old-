@@ -67,14 +67,6 @@ init -5 python:
             "warper",
             "duration"
         )
-        
-        def __init_subclass__(cls, *args, **kwargs):
-            """
-            Introduced in Python 3.6, so this won't be called unless Ren'Py 8+ is used.
-            """
-            
-            cls.focused = { }
-            super(AutofocusInterpolation, self).__init_subclass__(*args, **kwargs)
 
         def __init__(self, name, duration, focused_level, unfocused_level, warper, **kwargs):
             super(AutofocusInterpolation, self).__init__()
