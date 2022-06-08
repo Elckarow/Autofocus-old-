@@ -1,6 +1,17 @@
 init -5 python:
     from __future__ import division
 
+    class RedefineFocused(type):
+        """
+        Metaclass used to redefine the `focused` attribute automatically.
+        """
+
+        def __new__(cls, *args, **kwargs):
+            _class = super(Test, cls).__new__(cls, *args, **kwargs)
+            _class.focused = { }
+            return _class
+
+    @renpy.six.add_metaclass(RedefineFocused)
     class AutofocusInterpolation(AutofocusDisplayable):
         """
         A subclass of `AutofocusDisplayable` used as a base for classes that should change a displayable over a period of time.
@@ -50,7 +61,6 @@ init -5 python:
             Calls a redraw event along with the aforementioned two methods.
         """
 
-        focused = { }
         allowed_args = (
             "focused_level",
             "unfocused_level",
