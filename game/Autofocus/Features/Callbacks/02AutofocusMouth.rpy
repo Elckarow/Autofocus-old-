@@ -31,16 +31,21 @@ init -5 python:
             )
 
         def condition(self):
-            other_mouth_applied = bool(self.mouth_tags & set(self.attributes))
+            other_mouth_applied = bool(self.mouth_tags & self.attributes)
             return AutofocusStore.autofocus_mouth and not other_mouth_applied
 
         def do_stuff(self, mouth):
             renpy.show("%s %s" % (self.name, mouth), layer=self.layer)
         
+        def set_attributes(self):
+            super(AutofocusMouth, self).set_attributes()
+            self.attributes = set(self.attributes)
+        
         @staticmethod
-        def can_be_used():
+        def is_allowed():
             if not renpy.version(tuple=True) >= (7, 0):
                 print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.0 OR ABOVE]--- AutofocusMouth disabled" % renpy.version())
                 return False
 
             return True
+
