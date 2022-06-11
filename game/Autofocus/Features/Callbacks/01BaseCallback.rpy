@@ -1,5 +1,5 @@
 init -5 python:
-    class BaseCharCallback(AutofocusDisplayable):
+    class BaseCharCallback(AutofocusBase):
         """
         Base class for callbacks classes.
         Should not be applied to the displayable.
@@ -27,8 +27,7 @@ init -5 python:
         )
 
         def __init__(self, name, begin_parameter, end_parameter, **kwargs):
-            super(BaseCharCallback, self).__init__()
-            self.name = name
+            super(BaseCharCallback, self).__init__(name=name)
             self.begin_parameter = begin_parameter
             self.end_parameter = end_parameter
 
@@ -42,15 +41,16 @@ init -5 python:
             if not interact: return
 
             self.set_attributes()
+
             if not self.attributes: return
 
             if self.condition():
                 if event == "begin":
-                    self.do_stuff(self.begin_parameter)
+                    return self.do_stuff(self.begin_parameter)
 
                 elif event == "end":
-                    self.do_stuff(self.end_parameter)
+                    return self.do_stuff(self.end_parameter)
         
         @staticmethod
-        def can_be_used():
+        def is_allowed():
             return True
