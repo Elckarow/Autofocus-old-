@@ -7,21 +7,21 @@ init -5 python:
         """
 
         def __new__(cls, *args, **kwargs):
-            _class = super(RedefineFocused, cls).__new__(cls, *args, **kwargs)
+            _class = type.__new__(cls, *args, **kwargs)
             _class.focused = { }
             return _class
 
     @renpy.six.add_metaclass(RedefineFocused)
-    class AutofocusInterpolation(AutofocusDisplayable):
+    class AutofocusInterpolation(AutofocusBase):
         """
-        A subclass of `AutofocusDisplayable` used as a base for classes that should change a displayable over a period of time.
+        A subclass of `AutofocusBase` used as a base for classes that should change a displayable over a period of time.
         This interpolates between two values with a specified amount of duration.
 
         Attributes
         ----------
         `focused`: dict[str, bool] [Class Variable]
             A dictionary containing character focused bools.
-            To be redefined as a class variable again in other subclasses (If Ren'Py 8+ is used, this is done automatically thanks to `__init_subclass__`).
+            Defined as a class variable automatically for each subclass.
 
         `focused_level`: float | int
             The value to be interpolated to if focused.
@@ -33,7 +33,7 @@ init -5 python:
             The amount of time taken for the interpolation.
 
         `current_time`: float
-            Elapsed time after a state change, i.e. time when a sprite when 
+            Elapsed time after a state change, i.e. time when a sprite changes
             from a focused state -> unfocused and vice versa.
 
         `overlimit_behavior`: str
@@ -69,7 +69,7 @@ init -5 python:
         )
 
         def __init__(self, name, duration, focused_level, unfocused_level, warper, **kwargs):
-            super(AutofocusInterpolation, self).__init__()
+            super(AutofocusInterpolation, self).__init__(name=name)
 
             if isinstance(warper, basestring):
                 func = getattr(_warper, warper, None)
@@ -79,7 +79,6 @@ init -5 python:
                 
                 warper = func
 
-            self.name = name
             self.focused_level = focused_level
             self.unfocused_level = unfocused_level
             self.duration = duration
