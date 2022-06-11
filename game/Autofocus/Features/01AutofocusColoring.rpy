@@ -1,7 +1,7 @@
 init -5 python:
     from __future__ import print_function
     
-    class AutofocusColoring(AutofocusDisplayable):
+    class AutofocusColoring(AutofocusBase):
         """
         A class used for implementing image coloring using colormatrices. 
 
@@ -32,9 +32,9 @@ init -5 python:
         }
 
         def __init__(self, child, name, **kwargs):
-            super(AutofocusColoring, self).__init__()
-            self.name = name
+            super(AutofocusColoring, self).__init__(name=name)
             self.child = Transform(child)
+            self.matrix = IdentityMatrix()
 
         @staticmethod
         def is_allowed():
@@ -50,13 +50,13 @@ init -5 python:
 
         @property
         def matrix(self):
-            return self.__matrix
+            return self._matrix
 
         @matrix.setter
         def matrix(self, value):
-            if not isinstance(value, ColorMatrix): raise ValueError("matrix is not a ColorMatrix instance.")
+            if not isinstance(value, ColorMatrix): raise ValueError("%r is not a ColorMatrix instance." % value)
 
-            self.__matrix = value
+            self._matrix = value
 
         def set_current_matrix(self):
             self.set_attributes()
@@ -66,15 +66,13 @@ init -5 python:
 
                 self.matrix = matrix
                 break
-                
-            else:
-                self.matrix = IdentityMatrix()
 
         def render(self, width, height, st, at):
             self.set_current_matrix()
 
             if not self.is_on():
                 self.child.matrixcolor = IdentityMatrix()
+                self.matrix = IdentityMatrix()
                 return renpy.render(self.child, width, height, st, at)
             
             self.child.matrixcolor = self.matrix
