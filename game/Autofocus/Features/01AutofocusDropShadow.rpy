@@ -1,7 +1,7 @@
 init -5 python:
     from __future__ import print_function
     
-    class AutofocusDropShadow(AutofocusDisplayable):
+    class AutofocusDropShadow(AutofocusBase):
         """
         A class used to add a drop shadow effect. 
 
@@ -42,14 +42,13 @@ init -5 python:
         )
 
         def __init__(self, child, name, xoffset=0, yoffset=0, blur=10, color="#000", brightness=1.0, **kwargs):
-            super(AutofocusDropShadow, self).__init__()
+            super(AutofocusDropShadow, self).__init__(name=name)
            
             offset = kwargs.get("offset", None)
 
             if offset is not None:
                 xoffset, yoffset = offset
             
-            self.name = name
             self.child = child
             self.blur = blur
 
