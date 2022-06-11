@@ -86,35 +86,51 @@ init -6 python:
         
         `mode`: str
             Will dictate the returned value.
-            "both" will return a tuple containing Features kwargs and Callbacks kwargs.
-            "features" will only return Features kwargs.
-            "callbacks" will only return Callbacks kwargs.
-            "all" will return a dictionnary containing both Features kwargs and Callbacks kwargs.
-            "filter" will return a dictionnary containing everything but Features kwargs and Callbacks kwargs.
+            `"both"` will return a tuple containing Features kwargs and Callbacks kwargs.
+            `"features"` will only return Features kwargs.
+            `"callbacks"` will only return Callbacks kwargs.
+            `"all"` will return a dictionnary containing both Features kwargs and Callbacks kwargs.
+            `"filter"` will return a dictionnary containing everything but Features kwargs and Callbacks kwargs.
+            `"class_names_true"` will return a dictionnary where each key is a feature name, ie `"AutofocusZorder": value`, if `bool(value)` is True.
+            `"class_names_false"` will return a dictionnary where each key is a feature name, ie `"AutofocusZorder": value`, if `bool(value)` is False.
             
             Will raise an error if not any of the above.
         
         `error`: bool
-            If `True` and that `mode` isn't `"filter"`, will raise an error if a found subclass name isn't known.
+            If `True`, will raise an error if needed.
         """
         
         subclasses_name = [
             cls.__name__
-            for cls in AutofocusDisplayable.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True)
+            for cls in AutofocusBase.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True)
         ]
 
         callbacks = [
             cls.__name__
-            for cls in BaseCharCallback.get_subclasses()
+            for cls in BaseCharCallback.get_subclasses(exclude=AutofocusCallbackHandler, exclude_subclasses=True)
         ]
 
         filtered_kw = { }
         features_kw = { }
         callbacks_kw = { }
         all_kw = { }
+        class_names_true = { }
+        class_names_false = { }
 
         for cls, v in kwargs.items():
-            og_cls = cls
+            # checking for non-allowed features          
+            # at AutofocusDisplayable(AutofocusDropShadow=False)
+            if cls in callbacks or cls in subclasses_name:
+                if v is True:
+                    class_names_true[cls] = v
+                elif v is False:
+                    class_names_false[cls] = v
+                elif error:
+                    raise Exception("""'"Feature_Name": Value' - Value must either be `True` or `False`, not %s""" % v)
+                continue
+            
+            # checking for user arguments
+            # at AutofocusDisplayable(AutofocusDropShadow_blur=20)
             cls, _, k = cls.partition("_")
 
             if cls in callbacks:
@@ -134,23 +150,22 @@ init -6 python:
                 continue
 
             elif mode == "filter":
-                filtered_kw[og_cls] = v
+                filtered_kw[cls + _ + k] = v
                 continue
 
-            if error: raise Exception("Unknown subclass -> %r" % og_cls)
+            if error: raise Exception("Unknown -> %r" % cls)
         
-        if mode == "filter": return filtered_kw
-        elif mode == "all": return all_kw
-        elif mode == "callbacks": return callbacks_kw
-        elif mode == "features": return features_kw
-        elif mode == "both": return features_kw, callbacks_kw
-        else: raise Exception("Unknown mode -> '%s'" % mode)
+        if   mode == "filter":            return filtered_kw
+        elif mode == "all":               return all_kw
+        elif mode == "callbacks":         return callbacks_kw
+        elif mode == "features":          return features_kw
+        elif mode == "both":              return features_kw, callbacks_kw
+        elif mode == "class_names_true":  return class_names_true
+        elif mode == "class_names_false": return class_names_false
+
+        else: raise Exception("Unknown mode -> %r" % mode)
 
 
 init 999 python hide:
     for name, char in AutofocusDisplayable.characters.items():
-        char.display_args["callback"] = [
-                                            cls(name, **AutofocusDisplayable.callback_kwargs[name].get(cls.__name__, { }))
-                                            for cls in BaseCharCallback.get_subclasses()
-                                            if cls.can_be_used()
-                                        ]
+        char.display_args["callback"] = AutofocusCallbackHandler(name)
