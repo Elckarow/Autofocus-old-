@@ -41,7 +41,7 @@ init 1 python in AutofocusStore:
 
     def redraw_autofocus(f):
         """
-        Does something, then redraws all characters showing that are using `Autofocus`.
+        Calls `f`, then redraws all characters that are using `Autofocus`.
         """
 
         def redraw(*args, **kwargs):
