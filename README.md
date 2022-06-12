@@ -26,6 +26,7 @@ As of now the tool contains 5 features (and only works for Ren'Py 7):
 -adds a drop shadow effect to the character sprites
 
 a more in-depth guide of each feature is included in the package.
+each feature can be enabled / disabled thanks to the corresponding variable found in `01AutofocusStore.rpy`
 
 -
 -

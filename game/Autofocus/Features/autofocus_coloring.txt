@@ -3,6 +3,9 @@ Feature: Coloring
 Will color the character's sprites in accordance to the attributes given.
 
 
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_coloring`.
+
+
 The different colors are defined in the class variable 'matrix_map'.
 Each color is mapped by an attribute name that should be added to your layeredimages as followed:
 

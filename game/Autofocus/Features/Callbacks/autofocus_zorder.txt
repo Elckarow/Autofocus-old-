@@ -5,3 +5,5 @@ The character's zorder will change to 'begin_parameter' when talking, and when a
 allowed user-arguments:
 begin_parameter (when the character speaks)      defaults to 3
 end_parameter (when the character doesn't speak) defaults to 2
+=======
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_zorder`.

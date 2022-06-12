@@ -5,5 +5,7 @@ The character's mouth will be set to 'begin_parameter' when talking if it doesn'
 allowed user-arguments:
 begin_parameter (when the character speaks)      defaults to 'om'
 end_parameter (when the character doesn't speak) defaults to 'cm'
+=======
+This feature can be turned on / off with the store variable `AutofocusStore.autofocus_mouth`.
 
 If the version of Ren'Py is prior to 7.0, then this feature will automatically be disabled, as layeredimages have yet to be implemented.
