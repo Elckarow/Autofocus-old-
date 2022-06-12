@@ -1,7 +1,7 @@
 init -5 python:
     from __future__ import print_function
     
-    class AutofocusColoring(AutofocusDisplayable):
+    class AutofocusColoring(AutofocusBase):
         """
         A class used for implementing image coloring using colormatrices. 
 
@@ -31,16 +31,15 @@ init -5 python:
             "night": SaturationMatrix(0.8) * TintMatrix((115, 115, 165))
         }
 
-        def __init__(self, child, **kwargs):
-            super(AutofocusColoring, self).__init__()
+        def __init__(self, child, name, **kwargs):
+            super(AutofocusColoring, self).__init__(name=name)
             self.child = Transform(child)
-
             self.matrix = IdentityMatrix()
 
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
-                print("---[INCOMPATIBLE VERSION - %r - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusColoring disabled" % renpy.version())
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusColoring disabled" % renpy.version())
                 return False
 
             return config.gl2
@@ -51,16 +50,16 @@ init -5 python:
 
         @property
         def matrix(self):
-            return self.__matrix
+            return self._matrix
 
         @matrix.setter
         def matrix(self, value):
-            if not isinstance(value, ColorMatrix): raise ValueError("matrix is not a ColorMatrix instance.")
+            if not isinstance(value, ColorMatrix): raise ValueError("%r is not a ColorMatrix instance." % value)
 
-            self.__matrix = value
+            self._matrix = value
 
         def set_current_matrix(self):
-            self.matrix = IdentityMatrix()
+            self.set_attributes()
 
             for tag, matrix in self.matrix_map.items():
                 if tag not in self.attributes: continue 
@@ -69,10 +68,11 @@ init -5 python:
                 break
 
         def render(self, width, height, st, at):
-            self.set_attributes()
             self.set_current_matrix()
 
             if not self.is_on():
+                self.child.matrixcolor = IdentityMatrix()
+                self.matrix = IdentityMatrix()
                 return renpy.render(self.child, width, height, st, at)
             
             self.child.matrixcolor = self.matrix

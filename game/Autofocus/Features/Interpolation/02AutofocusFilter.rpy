@@ -11,8 +11,6 @@ init -5 python:
             The image to darken.
         """
 
-        focused = {}
-
         def __init__(self, child, name, duration=0.25, focused_level=0.0, unfocused_level=-0.1, warper=None, **kwargs):
             super(AutofocusFilter, self).__init__(name=name, duration=duration, focused_level=focused_level, unfocused_level=unfocused_level, warper=warper)
             self.child = Transform(child)
@@ -20,7 +18,7 @@ init -5 python:
         @staticmethod
         def is_allowed():
             if not renpy.version(tuple=True) >= (7, 4, 0):
-                print("---[INCOMPATIBLE VERSION - %r - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusFilter disabled" % renpy.version())
+                print("---[INCOMPATIBLE VERSION - %s - EXPECTED Ren'Py 7.4.0 OR ABOVE]--- AutofocusFilter disabled" % renpy.version())
                 return False
 
             return config.gl2

@@ -4,12 +4,15 @@
 
 2) take a look at each in-depth guide to make sure you understand how each feature works
 
+this one is very important: take a look inside `01AutofocusDisplayable.rpy`, `01OverridesAndOtherStuff.rpy` and `01AutofocusStore.rpy`.
+a lot of things are explained in here.
+
 ########################
 
 3) below your layeredimages definitions, add the following 'at AutofocusDisplayable(name="<character image tag>")'
 ie
 
-layeredimage eileen forward:
+layeredimage eileen:
     at AutofocusDisplayable(name="eileen")
     
     
@@ -17,8 +20,8 @@ custom parameters can be passed. please take a look at the corresponding in-dept
 to pass a custom argument, use the subclass name, followed by an underscore, then the argument name
 ie
 
-layeredimage eileen forward:
-    at AutofocusDisplayable(name="eileen", AutofocusDropShadow_blur=10)
+layeredimage eileen:
+    at AutofocusDisplayable(name="eileen", AutofocusDropShadow_blur=20)
 
 ########################
 

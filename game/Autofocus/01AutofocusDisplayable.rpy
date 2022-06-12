@@ -6,37 +6,36 @@ init -5 python:
         Elckarow#8399 (me), who is maintaining this thing and for making it usable and available.
     """
     
-    class AutofocusDisplayable(renpy.display.core.Displayable, renpy.python.NoRollback):
+    class AutofocusDisplayable(object):
         """
         Apply it like:
         ```
         layeredimage ayaya stuff boizhfcsxl ee:
-            at AutofocusDisplayable(name="ayaya")
+            at AutofocusDisplayable(name="ayaya stuff boizhfcsxl ee")
         ```
 
-        Base class for all the AutofocusDisplayable subclasses.
+        Should NOT serve as base for subclasses. See `AutofocusBase` at the end of the `01AutofocusDisplayable.rpy`.
 
         Attributes
         ----------
         `name`: str
             Name of the image tag.
             Needed for gettings the current attributes.
-
-        `layer`: str
-            The layer in which the image is shown. This variable is periodically updated. 
-            Needed for gettings the current attributes.
-
-        `attributes`: list[str]
-            Stores the current image attributes.
+        
+        `kwargs`: dict[str, Any]
+            Filtered user arguments.
+        
+        `unallowed_features`: list[str]
+            Explicitly disabled features for this Displayable.
         
         `characters`: dict[str, Character] [Class Variable]
             Stores the Characters created.
 
-        `allowed_args`: None | list[str] | tuple[str] [Class Variable]
+        `allowed_args`: None | list[str] | tuple[str] | set[type] [Class Variable]
             Arguments the user is allowed to pass.
-            If `None`, no argument is allowed, and will log a message in case an argument is passed.
-            Else, should be a `list` / `tuple` that contains the arguments allowed, and will log a message in case a non-allowed argument is passed.
-
+            If `None`, no argument is allowed, and will raise an error in case an argument is passed.
+            Else, should be a `list` / `tuple` / `set` that contains the arguments allowed, and will raise an error in case a non-allowed argument is passed.
+        
         Methods
         -------
         `is_allowed()` -> bool [Static Method]
@@ -49,40 +48,27 @@ init -5 python:
             Populates the `attributes` variable and updates the `layer` variable if needed.
             To be called from the render method.
         
-        `get_subclasses()` -> set[type] [Class Method]
+        `get_subclasses(exclude: list[type] | tuple[type] | set[type] | type, exclude_subclasses: bool)` -> set[type] [Class Method]
             Returns all subclasses of the current class.
 
         `character_visible_num()` -> int [Static Method]
-            Returns the number of Characters that are showing and that are defined
-            using `AutofocusCharacter` or `AutofocusDynamicCharacter`.
+            Returns the number of Characters that are showing and that use Autofocus features.
         """
 
         characters = { }
         allowed_args = None
 
         def __init__(self, name=None, **kwargs):
-            super(AutofocusDisplayable, self).__init__()
+            if not name: raise Exception("Character name isn't specified.")
 
-            self.name = name
-            self.attributes = [ ]
-            self.layer = "master"
-            self.kwargs = { }
+            name = tuple(name.split())
+            commmon_callback = kwargs.pop("common_callback", False)
 
-            subclasses_name = [
-                cls.__name__
-                for cls in self.get_subclasses()
-            ]
+            self.name = name[0]
+            self.kwargs, callback_kwargs = filter_autofocus_kwargs(kwargs)
+            self.unallowed_features = list(filter_autofocus_kwargs(kwargs, mode="class_names_false").keys())
 
-            for cls, v in kwargs.items():
-                og_cls = cls
-                cls, _, k = cls.partition("_")
-
-                if cls not in subclasses_name: raise Exception("Unknown subclass -> %r" % og_cls)
-
-                if cls not in self.kwargs:
-                    self.kwargs[cls] = { }
-
-                self.kwargs[cls][k] = v
+            AutofocusCallbackHandler.add_callback(name, callback_kwargs, commmon_callback)
             
         @staticmethod
         def is_allowed():
@@ -93,14 +79,16 @@ init -5 python:
             return False
 
         def __call__(self, child):
-            if not self.name: raise Exception("Character name isn't specified.")
-
             child = Flatten(child) 
 
-            for cls in self.get_subclasses():
+            for cls in self.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True):
                 if not cls.is_allowed(): continue
 
+                # for speed purposes
                 cls_name = cls.__name__
+
+                if cls_name in self.unallowed_features: continue
+
                 kwargs = { }
 
                 if cls.allowed_args is not None:
@@ -113,29 +101,55 @@ init -5 python:
                     if cls_name in self.kwargs: raise Exception("Arguments passed to %r, but this class doesn't allow user arguments." % cls_name)
                 
                 child = cls(child=child, name=self.name, **kwargs)
-                                                
+                                                            
             return child
 
         def set_attributes(self):
-            if not self.name in renpy.get_showing_tags(self.layer):
-                self.layer = None
-
-                for layer in config.layers:
-                    if self.name not in renpy.get_showing_tags(layer): continue
-
-                    self.layer = layer
-                    break
+            self.layer = get_layer(self.name)
 
             if self.layer is None:
                 self.attributes = [ ]
                 return
 
             self.attributes = list(renpy.get_attributes(self.name, self.layer) or [ ])
+        
+        @staticmethod
+        def character_visible_num(): # static to ensure we use AutofocusDisplayable.characters and not SomeSubclass.characters
+            return len(list(filter(renpy.showing, AutofocusDisplayable.characters.keys())))
 
         @classmethod
-        def get_subclasses(cls):
-            return set(get_all_subclasses(cls))
+        def get_subclasses(cls, exclude=(), exclude_subclasses=False):
+            return set(get_all_subclasses(cls, exclude, exclude_subclasses))
+
+        def __repr__(self):
+            return "<{} on {} at {}>".format(type(self).__name__, self.name, hex(id(self)))
         
-        @staticmethod # static to ensure we use AutofocusDisplayable.characters and not SomeSubclass.characters
-        def character_visible_num():
-            return len(filter(renpy.showing, AutofocusDisplayable.characters.keys()))
+        __str__ = __repr__
+
+###########################################################################################################
+                    
+    class AutofocusBase(AutofocusDisplayable, renpy.display.core.Displayable, renpy.python.NoRollback):
+        """
+        This class should be the base for new features.
+        
+        Attributes
+        ----------
+        `name`: str
+            Image tag.
+
+        `layer`: str
+            The layer in which the image is shown. This variable is periodically updated. 
+            Needed for gettings the current attributes.
+
+        `attributes`: list[str]
+            Stores the current image attributes.
+        """
+
+        def __init__(self, name, **kwargs):
+            # manual __init__ so that `super(AutofocusBase, self).__init__` doens't call `AutofocusDisplayable.__init__`,
+            # otherwise it'll throw an error since `name` defaults to `None`(and it'll prevent unwanted attributes from spawning).
+            renpy.display.core.Displayable.__init__(self)
+
+            self.name = name
+            self.layer = "master"
+            self.attributes = [ ]

@@ -6,10 +6,12 @@ This feature can be turned on / off with the store variable `AutofocusStore.auto
 
 
 allowed arguments:
-xoffset              defaults to 3
-yoffset              defaults to 3
-offset               optionnal, will override both xoffset and yoffset if passed
-blur                 defaults to 2.5
+xoffset              defaults to 0
+yoffset              defaults to 0
+offset               optional, will override both xoffset and yoffset if passed
+blur                 defaults to 10
+color                defaults to "#000" (black)
+brightness           defaults to 1.0
 
 
-If the version of Ren'Py is prior to 7.4.0, then this feature will automatically be disabled, as the ATL property 'matrixcolor' has yet to be implemented.
+If the version of Ren'Py is prior to 7.4.0, this feature will automatically be disabled, as the ATL property 'matrixcolor' has yet to be implemented.

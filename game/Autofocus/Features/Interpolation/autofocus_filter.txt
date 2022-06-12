@@ -1,6 +1,6 @@
 Feature: Autofilter
 
-When a character doesn't talk, their sprite will darken. And of course when this character speaks, its brightness will return to normal, and vice-versa.
+When a character doesn't talk, their sprite will darken, and when this character speaks its brightness will return to normal.
 
 This feature can be turned on / off with the store variable `AutofocusStore.autofocus_filter`.
 
