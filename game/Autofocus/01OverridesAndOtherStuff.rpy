@@ -24,7 +24,7 @@ init -6 python:
     """
     Contains useful functions.
     """
-
+    
     def get_all_subclasses(cls, exclude=(), exclude_subclasses=False):
         """
         Returns all subclasses of `cls`.
@@ -38,7 +38,6 @@ init -6 python:
         `exclude_subclasses`: bool
             If `True`, will exclude all subclasses of the classes passed in `exclude`.
         """
-        
         def get_subclasses(cls, exclude=()):
             for subclass in cls.__subclasses__():
                 if subclass not in exclude:
@@ -67,7 +66,6 @@ init -6 python:
         `name`: str
             The tag of the image.
         """
-        
         for layer in config.layers:
             if name not in renpy.get_showing_tags(layer): continue
             break
@@ -76,6 +74,28 @@ init -6 python:
             
         return layer
     
+    def get_warper(warper):
+        """
+        `warper`: str | callable
+            A callable or a string referring to a callable. If passed as such, tha value is first looked up in the `_warper` substore,
+            then in the global store.
+            TypeError is raised if the value found isn't a callable.
+        """
+        if isinstance(warper, basestring):
+            func = getattr(_warper, warper, None)
+
+            if func is None:
+                func = getattr(store, warper, None)
+            
+            if func is None:
+                raise TypeError("warper was given as a string, but no value was found")
+                
+            warper = func
+        
+        if not callable(warper):
+            raise TypeError("warper must be a function or a string referring to a function")
+        
+        return warper
 
     def filter_autofocus_kwargs(kwargs, mode="both", error=True):
         """
@@ -99,7 +119,6 @@ init -6 python:
         `error`: bool
             If `True`, will raise an error if needed.
         """
-        
         subclasses_name = [
             cls.__name__
             for cls in AutofocusBase.get_subclasses(exclude=BaseCharCallback, exclude_subclasses=True)
