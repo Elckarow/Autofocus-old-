@@ -41,8 +41,7 @@ init -5 python:
             is below the limit.
 
         `warper`: function
-            A function that will control how the interpolated value will change. Can be passed as a string `warper="linear"` and if did so,
-            the value is first looked up in the `_warper` substore, then in the global store if not found. `TypeError` is raised if the value found isn't a callable.
+            A function that will control how the interpolated value will change. Can be passed as a string `warper="linear"`.
 
         Methods
         -------
@@ -71,23 +70,11 @@ init -5 python:
         def __init__(self, name, duration, focused_level, unfocused_level, warper, **kwargs):
             super(AutofocusInterpolation, self).__init__(name=name)
 
-            if isinstance(warper, basestring):
-                func = getattr(_warper, warper, None)
-
-                if func is None:
-                    func = getattr(store, warper, None)
-                
-                warper = func
-
             self.focused_level = focused_level
             self.unfocused_level = unfocused_level
             self.duration = duration
 
-            if warper is None:
-                self.warper = _warper.easein
-            else:
-                if not callable(warper): raise TypeError("warper must be a function, not %r" % warper)
-                self.warper = warper
+            self.warper = get_warper(warper)
 
             self.set_defaults()
 
