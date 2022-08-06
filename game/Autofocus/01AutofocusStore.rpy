@@ -4,11 +4,11 @@ init -100 python in AutofocusStore:
     """
     
     __author__ = "Pseurae#6758", "Elckarow#8399"
-    __version__ = (1, 4, 0)
+    __version__ = (1, 5, 0)
 
     autofocus_coloring = True
     autofocus_dropshadow = True
-    autofocus_interpolation_minimum_char_requirement = 2
+    autofocus_minimum_char_requirement = 2
     autofocus_filter = True
     autofocus_zoom = True
     autofocus_zorder = True
