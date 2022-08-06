@@ -35,7 +35,7 @@ init -5 python:
             return AutofocusStore.autofocus_mouth and not other_mouth_applied
 
         def do_stuff(self, mouth):
-            renpy.show("%s %s" % (self.name, mouth), layer=self.layer)
+            renpy.show("%s %s" % (self.name, mouth), layer=self.layer, zorder=None)
         
         def set_attributes(self):
             super(AutofocusMouth, self).set_attributes()
