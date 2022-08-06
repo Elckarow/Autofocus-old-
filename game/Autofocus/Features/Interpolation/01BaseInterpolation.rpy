@@ -93,7 +93,7 @@ init -5 python:
             self.current = self.target
 
         def handle_logic(self):
-            if self.character_visible_num() >= AutofocusStore.autofocus_interpolation_minimum_char_requirement:
+            if self.character_visible_num() >= AutofocusStore.autofocus_minimum_char_requirement:
                 if renpy.get_say_image_tag() == self.name:
                     if not self.focused[self.name]:
                         self.current_time = 0.0
