@@ -71,7 +71,7 @@ init -5 python:
             AutofocusCallbackHandler.add_callback(name, callback_kwargs, commmon_callback)
             
             zorder = callback_kwargs.get("begin_parameter", 2)
-            config.tag_zorder[name] = zorder
+            config.tag_zorder.setdefault(name, zorder)
             
         @staticmethod
         def is_allowed():
