@@ -12,7 +12,7 @@ init -100 python in AutofocusStore:
     autofocus_filter = True
     autofocus_zoom = True
     autofocus_zorder = True
-    autofocus_mouth = True
+    autofocus_mouth = False
 
     def version(tuple=False):
         """
