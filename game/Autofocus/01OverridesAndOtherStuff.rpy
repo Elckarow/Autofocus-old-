@@ -3,7 +3,6 @@ init -5 python:
         """
         Creates and returns a `Character` object that allows, if image is given, features such as auto-zoom or coloring to be used.
         """
-
         char = renpy.character.Character(name, kind=kind, **kwargs)
         image = kwargs.get("image", getattr(kind, "image", None))
 
@@ -18,6 +17,10 @@ init -5 python:
     # Needed for backwards comptability
     AutofocusCharacter = Character
     AutofocusDynamicCharacter = DynamicCharacter
+    
+    # Use these to register a character that doesn't use Autofocus
+    BaseCharacter = renpy.character.Character
+    BaseDynamicCharacter = renpy.character.DynamicCharacter
     
 
 init -6 python:
