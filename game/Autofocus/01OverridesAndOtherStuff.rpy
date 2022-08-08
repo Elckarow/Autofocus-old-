@@ -5,7 +5,7 @@ init -5 python:
         """
 
         char = renpy.character.Character(name, kind=kind, **kwargs)
-        image = kwargs.get("image", None) or getattr(kind, "image")
+        image = kwargs.get("image", getattr(kind, "image", None))
 
         if image is not None:
             AutofocusDisplayable.characters[image] = char
