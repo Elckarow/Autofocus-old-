@@ -12,8 +12,8 @@ a lot of things are explained in here.
 3) below your layeredimages definitions, add the following 'at AutofocusDisplayable(name="<character image tag>")'
 ie
 
-layeredimage eileen:
-    at AutofocusDisplayable(name="eileen")
+layeredimage eileen happy:
+    at AutofocusDisplayable(name="eileen happy")
     
     
 custom parameters can be passed. please take a look at the corresponding in-depth guide to know which parameter can be passed
@@ -22,7 +22,3 @@ ie
 
 layeredimage eileen:
     at AutofocusDisplayable(name="eileen", AutofocusDropShadow_blur=20)
-
-########################
-
-4) in the case where every condition is met but you still can't use a feature, please take a look at `log.txt`. some features are automatically disabled for renpy versions that do not support them
