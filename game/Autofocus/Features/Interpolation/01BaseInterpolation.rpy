@@ -74,7 +74,7 @@ init -5 python:
             self.unfocused_level = unfocused_level
             self.duration = duration
 
-            self.warper = get_warper(warper)
+            self.warper = get_warper(warper or _warper.easein)
 
             self.set_defaults()
 
