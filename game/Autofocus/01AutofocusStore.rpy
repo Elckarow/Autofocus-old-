@@ -28,12 +28,12 @@ init -100 python in AutofocusStore:
         if tuple: return __author__
         return ", ".join(__author__)
         
-default autofocus_coloring = True
-default autofocus_dropshadow = False
-default autofocus_filter = True
-default autofocus_zoom = True
-default autofocus_zorder = True
-default autofocus_mouth = False
+default AutofocusStore.autofocus_coloring = True
+default AutofocusStore.autofocus_dropshadow = False
+default AutofocusStore.autofocus_filter = True
+default AutofocusStore.autofocus_zoom = True
+default AutofocusStore.autofocus_zorder = True
+default AutofocusStore.autofocus_mouth = False
 
 init 1 python in AutofocusStore:
     from store import AutofocusDisplayable, get_layer
