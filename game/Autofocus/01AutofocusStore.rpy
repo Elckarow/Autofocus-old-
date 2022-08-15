@@ -5,14 +5,8 @@ init -100 python in AutofocusStore:
     
     __author__ = "Pseurae#6758", "Elckarow#8399"
     __version__ = (1, 5, 0)
-
-    autofocus_coloring = True
-    autofocus_dropshadow = False
+    
     autofocus_minimum_char_requirement = 1
-    autofocus_filter = True
-    autofocus_zoom = True
-    autofocus_zorder = True
-    autofocus_mouth = False
 
     def version(tuple=False):
         """
@@ -34,7 +28,12 @@ init -100 python in AutofocusStore:
         if tuple: return __author__
         return ", ".join(__author__)
         
-
+default autofocus_coloring = True
+default autofocus_dropshadow = False
+default autofocus_filter = True
+default autofocus_zoom = True
+default autofocus_zorder = True
+default autofocus_mouth = False
 
 init 1 python in AutofocusStore:
     from store import AutofocusDisplayable, get_layer
