@@ -27,7 +27,8 @@ init -100 python in AutofocusStore:
 
         if tuple: return __author__
         return ", ".join(__author__)
-        
+
+# defaults to enable saving
 default AutofocusStore.autofocus_coloring = True
 default AutofocusStore.autofocus_dropshadow = False
 default AutofocusStore.autofocus_filter = True
