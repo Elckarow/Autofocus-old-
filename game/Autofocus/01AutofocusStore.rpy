@@ -7,8 +7,8 @@ init -100 python in AutofocusStore:
     __version__ = (1, 5, 0)
 
     autofocus_coloring = True
-    autofocus_dropshadow = True
-    autofocus_minimum_char_requirement = 2
+    autofocus_dropshadow = False
+    autofocus_minimum_char_requirement = 1
     autofocus_filter = True
     autofocus_zoom = True
     autofocus_zorder = True

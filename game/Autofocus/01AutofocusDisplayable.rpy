@@ -59,7 +59,8 @@ init -5 python:
         allowed_args = None
 
         def __init__(self, name=None, **kwargs):
-            if not name: raise Exception("Character name isn't specified.")
+            if not name:
+                raise Exception("Character name isn't specified.")
 
             name = tuple(name.split())
             commmon_callback = kwargs.pop("common_callback", False)
@@ -96,12 +97,14 @@ init -5 python:
 
                 if cls.allowed_args is not None:
                     for k, v in self.kwargs.get(cls_name, {}).items():
-                        if k not in cls.allowed_args: raise Exception("Argument %r isn't allowed for the class %r" % (k, cls_name))
+                        if k not in cls.allowed_args:
+                            raise Exception("Argument %r isn't allowed for the class %r" % (k, cls_name))
                             
                         kwargs[k] = v
 
                 else:
-                    if cls_name in self.kwargs: raise Exception("Arguments passed to %r, but this class doesn't allow user arguments." % cls_name)
+                    if cls_name in self.kwargs:
+                        raise Exception("Arguments passed to %r, but this class doesn't allow user arguments." % cls_name)
                 
                 child = cls(child=child, name=self.name, **kwargs)
                                                             
@@ -125,7 +128,7 @@ init -5 python:
             return set(get_all_subclasses(cls, exclude, exclude_subclasses))
 
         def __repr__(self):
-            return "<{} on {} at {}>".format(type(self).__name__, self.name, hex(id(self)))
+            return "<{} on {} at {:x}>".format(type(self).__name__, self.name, id(self))
         
         __str__ = __repr__
 
