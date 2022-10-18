@@ -27,6 +27,7 @@ init -5 python:
             "dawn": TintMatrix((102, 76, 127)) * SaturationMatrix(0.8),
             "day": IdentityMatrix(),
             "sunset": TintMatrix((255, 202, 202)),
+            "afternoon": TintMatrix((255, 202, 202)),
             "evening": TintMatrix((131, 102, 127)) * BrightnessMatrix(0.25),
             "night": SaturationMatrix(0.8) * TintMatrix((115, 115, 165))
         }
