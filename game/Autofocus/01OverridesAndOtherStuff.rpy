@@ -190,22 +190,4 @@ init -6 python:
 
 init 999 python hide:
     for name, char in AutofocusDisplayable.characters.items():
-         callbacks = char.display_args["callback"]
-         autofocus_callback_handler = (AutofocusCallbackHandler(name),)
-         
-         if callbacks is None:
-              char.display_args["callback"] = autofocus_callback_handler
-         else:
-              if renpy.version_tuple >= ((7, 5, 4) if renpy.compat.PY2 else (8, 0, 4)):
-                   # see #3948
-                   char.display_args["callback"] = renpy.easy.to_tuple(callbacks) + autofocus_callback_handler
-              
-              else:
-                   # implementing the behavior of renpy.easy.to_tuple
-                   from collections.abc import Iterable
-                   if isinstance(callbacks, Iterable) and not isinstance(callbacks, str):
-                        callbacks = tuple(callbacks)
-                   else:
-                        callbacks = (callbacks,)
-                   
-                   char.display_args["callback"] = callbacks + autofocus_callback_handler
+         char.display_args["callback"] = AutofocusCallbackHandler(name)
