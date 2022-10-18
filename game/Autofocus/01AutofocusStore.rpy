@@ -36,6 +36,8 @@ default AutofocusStore.autofocus_zoom = True
 default AutofocusStore.autofocus_zorder = True
 default AutofocusStore.autofocus_mouth = False
 
+default persistent.autofocus_drop_shadow = False
+
 init 1 python in AutofocusStore:
     from store import AutofocusDisplayable, get_layer
 
