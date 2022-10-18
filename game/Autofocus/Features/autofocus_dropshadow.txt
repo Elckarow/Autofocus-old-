@@ -3,6 +3,8 @@ Feature: DropShadow
 Adds a drop shadow effect to the character's sprites.
 
 This feature can be turned on / off with the store variable `AutofocusStore.autofocus_dropshadow`.
+The persitent `persistent.autofocus_drop_shadow` can also be used to allow the player to choose rendering with
+the drop shadow effect when it's on (as a toggle button in the `preference` screen for instance).
 
 
 allowed arguments:
