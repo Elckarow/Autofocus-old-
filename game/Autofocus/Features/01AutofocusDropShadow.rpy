@@ -79,7 +79,7 @@ init -5 python:
 
         @staticmethod
         def is_on():
-            return AutofocusStore.autofocus_dropshadow
+            return AutofocusStore.autofocus_dropshadow and persistent.autofocus_drop_shadow
         
         def render(self, w, h, st, at):
             if not self.is_on():
